@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentAI — Dental App</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #C4B0A2;
+    --brand-dark: #8e756a;
+    --brand-darker: #6b5247;
+    --brand-light: #e8ddd8;
+    --brand-bg: #f7f3f1;
+    --white: #ffffff;
+    --text: #2c2420;
+    --text-muted: #7a6460;
+    --green-bg: #e8f5e9;
+    --green: #388e3c;
+    --green-border: #81c784;
+    --orange-bg: #fff3e0;
+    --orange: #e65100;
+    --orange-border: #ffb74d;
+    --red-bg: #fce4ec;
+    --red: #c62828;
+    --red-border: #ef9a9a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #ede8e4;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 24px;
+    gap: 0;
+  }
+
+  /* PAGE LAYOUT */
+  .app-screens {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .screen-label {
+    text-align: center;
+    font-size: 12px;
+    color: var(--brand-dark);
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* PHONE FRAME */
+  .phone {
+    width: 320px;
+    border-radius: 44px;
+    background: var(--brand-bg);
+    border: 2.5px solid #b8a295;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(100,70,56,0.18), 0 2px 8px rgba(100,70,56,0.08);
+  }
+
+  .status-bar {
+    background: var(--brand);
+    padding: 12px 24px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .status-bar span { font-size: 12px; color: #fff; font-weight: 500; letter-spacing: 0.02em; }
+
+  /* ========== SCREEN 1: DASHBOARD ========== */
+  .s1-header {
+    background: var(--brand);
+    padding: 20px 22px 28px;
+  }
+  .s1-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .greeting-sub {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 3px;
+    font-weight: 300;
+  }
+  .greeting-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 1.5px solid rgba(255,255,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 500; color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 24px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 18px 18px 0;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 14px 16px;
+    border: 0.5px solid var(--brand-light);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-sub {
+    font-size: 10px;
+    color: var(--brand-dark);
+  }
+
+  /* Section head */
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 18px 10px;
+  }
+  .sec-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .sec-link {
+    font-size: 11px;
+    color: var(--brand-dark);
+    text-decoration: none;
+  }
+
+  /* Appointment cards */
+  .appt-list {
+    padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .appt-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 0.5px solid var(--brand-light);
+  }
+  .appt-time-col {
+    text-align: center;
+    min-width: 44px;
+  }
+  .appt-time {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--brand-dark);
+    font-family: 'Playfair Display', serif;
+  }
+  .appt-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--brand);
+    margin: 5px auto;
+  }
+  .divider-v {
+    width: 1px;
+    height: 36px;
+    background: var(--brand-light);
+    flex-shrink: 0;
+  }
+  .appt-info { flex: 1; }
+  .appt-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .appt-proc {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .badge {
+    font-size: 10px;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .badge-new { background: var(--green-bg); color: var(--green); }
+  .badge-reg { background: var(--brand-light); color: var(--brand-dark); }
+  .badge-urgent { background: var(--orange-bg); color: var(--orange); }
+
+  /* ========== SCREEN 2: PATIENT HISTORY ========== */
+  .s2-header {
+    background: var(--brand);
+    padding: 16px 22px 22px;
+  }
+  .back-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .back-arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: #fff;
+  }
+  .back-label { font-size: 12px; color: rgba(255,255,255,0.8); }
+  .patient-row { display: flex; align-items: center; gap: 14px; }
+  .avatar-lg {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: #fff;
+    flex-shrink: 0;
+  }
+  .patient-name-lg {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .patient-meta { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    background: var(--brand-light);
+    margin: 14px 18px;
+    border-radius: 24px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    padding: 7px 4px;
+    border-radius: 20px;
+    color: var(--text-muted);
+    font-weight: 400;
+    cursor: pointer;
+  }
+  .tab.active {
+    background: var(--white);
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Visit cards */
+  .history-list {
+    padding: 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .visit-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 0.5px solid var(--brand-light);
+  }
+  .visit-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .visit-date { font-size: 11px; color: var(--text-muted); }
+  .visit-status {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    font-weight: 500;
+  }
+  .visit-proc {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 5px;
+  }
+  .visit-note {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+  .tooth-chip {
+    display: inline-block;
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-weight: 500;
+  }
+
+  /* ========== SCREEN 3: TOOTH FORMULA ========== */
+  .s3-header {
+    background: var(--brand);
+    padding: 16px 22px 18px;
+  }
+  .formula-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .formula-sub { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  .formula-wrap {
+    padding: 14px 18px 0;
+  }
+  .jaw-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .jaw-row {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+  .tooth {
+    width: 24px; height: 30px;
+    border-radius: 5px 5px 7px 7px;
+    border: 1.5px solid var(--brand-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: 500;
+    background: var(--white);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .tooth:hover { transform: scale(1.1); }
+  .tooth.healthy  { background: #f0faf0; border-color: #b8d8b0; color: #5a8a52; }
+  .tooth.treated  { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .tooth.caries   { background: var(--orange-bg); border-color: var(--orange-border); color: var(--orange); }
+  .tooth.crown    { background: var(--brand-light); border-color: var(--brand); color: var(--brand-dark); }
+  .tooth.missing  { background: var(--red-bg); border-color: var(--red-border); color: var(--red); opacity: 0.65; }
+
+  .jaw-divider {
+    height: 1.5px;
+    background: var(--brand-light);
+    margin: 6px 0;
+    border-radius: 2px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px 18px 14px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* Tooth detail */
+  .tooth-detail {
+    margin: 0 18px 14px;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 16px;
+    border: 0.5px solid var(--brand-light);
+  }
+  .detail-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--brand-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .detail-crown-badge {
+    font-size: 9px;
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+  }
+  .detail-key { font-size: 11px; color: var(--text-muted); }
+  .detail-val { font-size: 11px; font-weight: 500; color: var(--text); }
+
+  /* ========== BOTTOM NAV ========== */
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--white);
+    border-top: 0.5px solid var(--brand-light);
+    padding: 12px 0 16px;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+  }
+  .nav-icon { width: 24px; height: 24px; }
+  .nav-label { font-size: 10px; color: var(--text-muted); }
+  .nav-item.active .nav-label { color: var(--brand-dark); font-weight: 500; }
+  .nav-active-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--brand-dark);
+    margin-top: -2px;
+  }
+
+  /* Screen content wrap */
+  .screen-content { display: flex; flex-direction: column; }
+
+  /* ========== ADD APPOINTMENT SCREEN ========== */
+  .s4-header {
+    background: var(--brand);
+    padding: 16px 22px 22px;
+  }
+  .s4-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .s4-sub { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+  .form-wrap { padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+  .form-field { display: flex; flex-direction: column; gap: 5px; }
+  .form-label { font-size: 11px; color: var(--text-muted); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; }
+  .form-input {
+    background: var(--white);
+    border: 0.5px solid var(--brand-light);
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 13px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+  }
+  .form-input:focus { border-color: var(--brand); }
+  .form-input.placeholder { color: var(--text-muted); }
+
+  .time-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .patient-select-card {
+    background: var(--white);
+    border: 0.5px solid var(--brand-light);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .patient-select-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--brand-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: var(--brand-dark);
+    flex-shrink: 0;
+  }
+  .patient-select-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .patient-select-meta { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .chevron { margin-left: auto; color: var(--text-muted); font-size: 14px; }
+
+  .procedure-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .proc-chip {
+    background: var(--white);
+    border: 1px solid var(--brand-light);
+    border-radius: 20px;
+    padding: 6px 13px;
+    font-size: 11px;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .proc-chip.selected {
+    background: var(--brand-light);
+    border-color: var(--brand);
+    color: var(--brand-dark);
+    font-weight: 500;
+  }
+
+  .btn-primary {
+    background: var(--brand-dark);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    padding: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    width: 100%;
+    letter-spacing: 0.01em;
+  }
+</style>
+</head>
+<body>
+<div class="app-screens">
+
+  <!-- ===== SCREEN 1: DASHBOARD ===== -->
+  <div>
+    <div class="screen-label">Главная</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>&#9679;&#9679;&#9679; &nbsp;100%</span>
+      </div>
+      <div class="screen-content">
+        <div class="s1-header">
+          <div class="s1-top">
+            <div>
+              <div class="greeting-sub">Добрый день,</div>
+              <div class="greeting-name">Доктор Смирнова</div>
+            </div>
+            <div class="avatar">АС</div>
+          </div>
+          <div class="date-chip">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1" y="2" width="10" height="9" rx="1.5" stroke="rgba(255,255,255,0.8)" stroke-width="1"/><path d="M4 1v2M8 1v2M1 5h10" stroke="rgba(255,255,255,0.8)" stroke-width="1" stroke-linecap="round"/></svg>
+            Воскресенье, 6 апреля 2026
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-label">Приёмов сегодня</div>
+            <div class="stat-value">8</div>
+            <div class="stat-sub">+2 к вчера</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Пациентов всего</div>
+            <div class="stat-value">142</div>
+            <div class="stat-sub">3 новых</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Завершено</div>
+            <div class="stat-value">3</div>
+            <div class="stat-sub">из 8</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Следующий приём</div>
+            <div class="stat-value" style="font-size:22px;">12:30</div>
+            <div class="stat-sub">через 15 мин</div>
+          </div>
+        </div>
+
+        <div class="sec-head">
+          <div class="sec-title">Расписание</div>
+          <a class="sec-link" href="#">все записи →</a>
+        </div>
+
+        <div class="appt-list">
+          <div class="appt-card">
+            <div class="appt-time-col">
+              <div class="appt-time">12:30</div>
+              <div class="appt-dot"></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="appt-info">
+              <div class="appt-name">Иванов А.П.</div>
+              <div class="appt-proc">Лечение кариеса · з.16</div>
+            </div>
+            <div class="badge badge-reg">повтор</div>
+          </div>
+          <div class="appt-card">
+            <div class="appt-time-col">
+              <div class="appt-time">13:15</div>
+              <div class="appt-dot"></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="appt-info">
+              <div class="appt-name">Петрова М.С.</div>
+              <div class="appt-proc">Профилактика</div>
+            </div>
+            <div class="badge badge-new">новый</div>
+          </div>
+          <div class="appt-card">
+            <div class="appt-time-col">
+              <div class="appt-time">14:00</div>
+              <div class="appt-dot"></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="appt-info">
+              <div class="appt-name">Козлов Д.В.</div>
+              <div class="appt-proc">Удаление · з.48</div>
+            </div>
+            <div class="badge badge-urgent">срочно</div>
+          </div>
+          <div class="appt-card">
+            <div class="appt-time-col">
+              <div class="appt-time">15:30</div>
+              <div class="appt-dot"></div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="appt-info">
+              <div class="appt-name">Новикова Е.А.</div>
+              <div class="appt-proc">Чистка зубов</div>
+            </div>
+            <div class="badge badge-new">новый</div>
+          </div>
+        </div>
+
+        <div class="bottom-nav" style="margin-top:18px;">
+          <div class="nav-item active">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="#8e756a"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#c4b0a2"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#c4b0a2"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#c4b0a2"/></svg>
+            <div class="nav-label" style="color:#8e756a;font-weight:500;">Главная</div>
+            <div class="nav-active-dot"></div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#c4b0a2" stroke-width="1.5"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">Пациенты</div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" stroke="#c4b0a2" stroke-width="1.5"/><path d="M8 2v4M16 2v4M3 10h18" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/><path d="M8 15h8M8 18h5" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">Запись</div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#c4b0a2" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">История</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 2: PATIENT HISTORY ===== -->
+  <div>
+    <div class="screen-label">Карточка пациента</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>&#9679;&#9679;&#9679; &nbsp;100%</span>
+      </div>
+      <div class="screen-content">
+        <div class="s2-header">
+          <div class="back-row">
+            <div class="back-arrow">&#8592;</div>
+            <span class="back-label">Пациенты</span>
+          </div>
+          <div class="patient-row">
+            <div class="avatar-lg">ИА</div>
+            <div>
+              <div class="patient-name-lg">Иванов Алексей П.</div>
+              <div class="patient-meta">32 года &nbsp;·&nbsp; с 2021 года &nbsp;·&nbsp; 12 визитов</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <div class="tab">Инфо</div>
+          <div class="tab active">История</div>
+          <div class="tab">Формула</div>
+        </div>
+
+        <div class="history-list">
+          <div class="visit-card">
+            <div class="visit-top">
+              <div class="visit-date">18 марта 2026</div>
+              <div class="visit-status">завершён</div>
+            </div>
+            <div class="visit-proc">Лечение кариеса</div>
+            <div class="visit-note">Препарирование и пломбирование. Материал: светополимер. Анестезия: ультракаин.</div>
+            <div class="tooth-chip">Зуб 16</div>
+          </div>
+          <div class="visit-card">
+            <div class="visit-top">
+              <div class="visit-date">5 января 2026</div>
+              <div class="visit-status">завершён</div>
+            </div>
+            <div class="visit-proc">Профилактическая чистка</div>
+            <div class="visit-note">Ультразвуковая чистка, полировка, Air Flow. Состояние дёсен хорошее.</div>
+          </div>
+          <div class="visit-card">
+            <div class="visit-top">
+              <div class="visit-date">2 сент. 2025</div>
+              <div class="visit-status">завершён</div>
+            </div>
+            <div class="visit-proc">Эндодонтическое лечение</div>
+            <div class="visit-note">Удаление нерва, 3 канала. Временная пломба. Назначен повторный приём.</div>
+            <div class="tooth-chip">Зуб 36</div>
+          </div>
+          <div class="visit-card">
+            <div class="visit-top">
+              <div class="visit-date">14 мая 2025</div>
+              <div class="visit-status">завершён</div>
+            </div>
+            <div class="visit-proc">Удаление зуба</div>
+            <div class="visit-note">Удаление зуба мудрости под местной анестезией. Швы не накладывались.</div>
+            <div class="tooth-chip">Зуб 38</div>
+          </div>
+        </div>
+
+        <div class="bottom-nav" style="margin-top:16px;">
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/></svg>
+            <div class="nav-label">Главная</div>
+          </div>
+          <div class="nav-item active">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#8e756a"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#8e756a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label" style="color:#8e756a;font-weight:500;">Пациенты</div>
+            <div class="nav-active-dot"></div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" stroke="#c4b0a2" stroke-width="1.5"/><path d="M8 2v4M16 2v4M3 10h18" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">Запись</div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#c4b0a2" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">История</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3: TOOTH FORMULA ===== -->
+  <div>
+    <div class="screen-label">Зубная формула</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>&#9679;&#9679;&#9679; &nbsp;100%</span>
+      </div>
+      <div class="screen-content">
+        <div class="s3-header">
+          <div class="back-row">
+            <div class="back-arrow">&#8592;</div>
+            <span class="back-label">Иванов А.П.</span>
+          </div>
+          <div class="formula-title">Зубная формула</div>
+          <div class="formula-sub">Нажмите на зуб для подробностей</div>
+        </div>
+
+        <div class="formula-wrap">
+          <div class="jaw-label">Верхняя челюсть</div>
+          <div class="jaw-row">
+            <div class="tooth missing">18</div>
+            <div class="tooth healthy">17</div>
+            <div class="tooth crown">16</div>
+            <div class="tooth healthy">15</div>
+            <div class="tooth healthy">14</div>
+            <div class="tooth caries">13</div>
+            <div class="tooth healthy">12</div>
+            <div class="tooth healthy">11</div>
+          </div>
+          <div class="jaw-row">
+            <div class="tooth healthy">21</div>
+            <div class="tooth healthy">22</div>
+            <div class="tooth treated">23</div>
+            <div class="tooth healthy">24</div>
+            <div class="tooth healthy">25</div>
+            <div class="tooth healthy">26</div>
+            <div class="tooth healthy">27</div>
+            <div class="tooth healthy">28</div>
+          </div>
+          <div class="jaw-divider"></div>
+          <div class="jaw-row">
+            <div class="tooth healthy">31</div>
+            <div class="tooth healthy">32</div>
+            <div class="tooth healthy">33</div>
+            <div class="tooth healthy">34</div>
+            <div class="tooth healthy">35</div>
+            <div class="tooth crown">36</div>
+            <div class="tooth healthy">37</div>
+            <div class="tooth missing">38</div>
+          </div>
+          <div class="jaw-row">
+            <div class="tooth missing">48</div>
+            <div class="tooth healthy">47</div>
+            <div class="tooth healthy">46</div>
+            <div class="tooth healthy">45</div>
+            <div class="tooth caries">44</div>
+            <div class="tooth healthy">43</div>
+            <div class="tooth healthy">42</div>
+            <div class="tooth healthy">41</div>
+          </div>
+          <div class="jaw-label" style="margin-top:6px;">Нижняя челюсть</div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#b8d8b0;"></div>Здоров</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#81c784;"></div>Пролечен</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ffb74d;"></div>Кариес</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#c4b0a2;"></div>Коронка</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#ef9a9a;"></div>Удалён</div>
+        </div>
+
+        <div class="tooth-detail">
+          <div class="detail-title">
+            Зуб 16
+            <span class="detail-crown-badge">Коронка</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Вмешательство</span>
+            <span class="detail-val">18.03.2026</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Процедура</span>
+            <span class="detail-val">Лечение кариеса</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Материал</span>
+            <span class="detail-val">Светополимер</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-key">Врач</span>
+            <span class="detail-val">Смирнова А.В.</span>
+          </div>
+        </div>
+
+        <div class="bottom-nav" style="margin-top:10px;">
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/></svg>
+            <div class="nav-label">Главная</div>
+          </div>
+          <div class="nav-item active">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#8e756a"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#8e756a" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label" style="color:#8e756a;font-weight:500;">Пациенты</div>
+            <div class="nav-active-dot"></div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" stroke="#c4b0a2" stroke-width="1.5"/><path d="M8 2v4M16 2v4M3 10h18" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">Запись</div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#c4b0a2" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">История</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 4: ADD APPOINTMENT ===== -->
+  <div>
+    <div class="screen-label">Новая запись</div>
+    <div class="phone">
+      <div class="status-bar">
+        <span>9:41</span>
+        <span>&#9679;&#9679;&#9679; &nbsp;100%</span>
+      </div>
+      <div class="screen-content">
+        <div class="s4-header">
+          <div class="back-row">
+            <div class="back-arrow">&#8592;</div>
+            <span class="back-label">Расписание</span>
+          </div>
+          <div class="s4-title">Новая запись</div>
+          <div class="s4-sub">Заполните данные приёма</div>
+        </div>
+
+        <div class="form-wrap">
+          <div class="form-field">
+            <div class="form-label">Пациент</div>
+            <div class="patient-select-card">
+              <div class="patient-select-avatar">ИА</div>
+              <div>
+                <div class="patient-select-name">Иванов Алексей П.</div>
+                <div class="patient-select-meta">32 года · повторный пациент</div>
+              </div>
+              <div class="chevron">&#8250;</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-label">Дата</div>
+            <div class="form-input" style="color:#2c2420;">6 апреля 2026 &nbsp;·&nbsp; Воскресенье</div>
+          </div>
+
+          <div class="time-row">
+            <div class="form-field">
+              <div class="form-label">Начало</div>
+              <div class="form-input">12:30</div>
+            </div>
+            <div class="form-field">
+              <div class="form-label">Длительность</div>
+              <div class="form-input">45 мин</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-label">Процедура</div>
+            <div class="procedure-chips">
+              <div class="proc-chip selected">Лечение кариеса</div>
+              <div class="proc-chip">Чистка</div>
+              <div class="proc-chip">Удаление</div>
+              <div class="proc-chip">Протезирование</div>
+              <div class="proc-chip">Консультация</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="form-label">Заметки</div>
+            <div class="form-input" style="color:#7a6460; min-height:60px; line-height:1.5;">Продолжение лечения зуба 16. Пломбирование.</div>
+          </div>
+
+          <button class="btn-primary">Сохранить запись</button>
+        </div>
+
+        <div class="bottom-nav">
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="3" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="3" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/><rect x="13" y="13" width="8" height="8" rx="2" stroke="#c4b0a2" stroke-width="1.5"/></svg>
+            <div class="nav-label">Главная</div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#c4b0a2" stroke-width="1.5"/><path d="M4 20c0-4 3.582-7 8-7s8 3 8 7" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">Пациенты</div>
+          </div>
+          <div class="nav-item active">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="17" rx="2.5" fill="#8e756a"/><path d="M8 2v4M16 2v4M3 10h18" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label" style="color:#8e756a;font-weight:500;">Запись</div>
+            <div class="nav-active-dot"></div>
+          </div>
+          <div class="nav-item">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="#c4b0a2" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="#c4b0a2" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="nav-label">История</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
