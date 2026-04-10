@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Анна Иванова - Врач-стоматолог</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            transition: all 0.3s;
+        }
+        
+        nav.scrolled {
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .logo:hover {
+            color: #2563eb;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            color: #4b5563;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+        }
+        
+        .nav-link:hover {
+            color: #2563eb;
+        }
+        
+        .btn-primary {
+            padding: 0.5rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #eff6ff 0%, #ffffff 50%, #eff6ff 100%);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero h1 .italic {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: inherit;
+        }
+        
+        .btn-large:hover {
+            background: #1d4ed8;
+        }
+        
+        .trust-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+            opacity: 0.4;
+        }
+        
+        .trust-badges span {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .pulse-dot {
+            width: 0.75rem;
+            height: 0.75rem;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-divider {
+            width: 5rem;
+            height: 0.25rem;
+            background: #2563eb;
+            margin: 0 auto 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            max-width: 42rem;
+            margin: 0 auto;
+        }
+        
+        /* About Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .achievement-card {
+            background: #eff6ff;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: box-shadow 0.3s;
+        }
+        
+        .achievement-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .icon-circle {
+            width: 4rem;
+            height: 4rem;
+            background: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .achievement-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .achievement-card p {
+            color: #4b5563;
+        }
+        
+        .credo {
+            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+        }
+        
+        .credo blockquote {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .credo p {
+            color: #bfdbfe;
+        }
+        
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .certificate {
+            aspect-ratio: 3/4;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        
+        .certificate:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .certificate img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .service-icon {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+        
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+        
+        .service-card:hover h3 {
+            color: #2563eb;
+        }
+        
+        .service-card p {
+            color: #4b5563;
+            line-height: 1.7;
+        }
+        
+        /* Before/After Section */
+        .slider-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .case-slide {
+            padding: 0 1rem;
+        }
+        
+        .comparison-slider {
+            position: relative;
+            aspect-ratio: 16/10;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            cursor: ew-resize;
+            user-select: none;
+        }
+        
+        .comparison-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        
+        .slider-handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: white;
+            z-index: 10;
+        }
+        
+        .slider-handle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3rem;
+            height: 3rem;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .slider-labels {
+            position: absolute;
+            top: 1rem;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 5;
+        }
+        
+        .slider-label {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+        
+        .case-details {
+            background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .case-detail {
+            margin-bottom: 1rem;
+        }
+        
+        .case-detail:last-child {
+            margin-bottom: 0;
+        }
+        
+        .case-detail h4 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .case-detail p {
+            font-size: 1.125rem;
+        }
+        
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+        
+        .star {
+            color: #fbbf24;
+            fill: #fbbf24;
+        }
+        
+        .testimonial-text {
+            color: #374151;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-source {
+            padding-top: 1rem;
+            border-top: 1px solid #f3f4f6;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        
+        /* FAQ */
+        .faq-list {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: linear-gradient(135deg, #eff6ff 0%, #faf5ff 100%);
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.125rem;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: #374151;
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .contact-form {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.3s;
+        }
+        
+        .contact-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .messengers {
+            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            color: white;
+        }
+        
+        .messengers h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .messengers p {
+            color: #bfdbfe;
+            margin-bottom: 1.5rem;
+        }
+        
+        .messenger-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .messenger-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .messenger-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .map-container {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-image {
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+        
+        .map-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+            padding: 1.5rem;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: #111827;
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-brand p {
+            color: #9ca3af;
+        }
+        
+        .footer-links h4 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a,
+        .footer-links button {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .footer-links a:hover,
+        .footer-links button:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        
+        /* Mobile Toast */
+        .toast {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.3s;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast.success {
+            border-left: 4px solid #10b981;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-grid,
+            .achievements-grid,
+            .services-grid,
+            .certificates-grid,
+            .testimonials-grid,
+            .contact-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .credo blockquote {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="logo" onclick="scrollToTop(); return false;">Анна Иванова</a>
+                <div class="nav-links">
+                    <button class="nav-link" onclick="scrollToSection('about')">Обо мне</button>
+                    <button class="nav-link" onclick="scrollToSection('services')">Услуги</button>
+                    <button class="nav-link" onclick="scrollToSection('cases')">Кейсы</button>
+                    <button class="nav-link" onclick="scrollToSection('testimonials')">Отзывы</button>
+                    <button class="nav-link" onclick="scrollToSection('faq')">FAQ</button>
+                    <button class="nav-link" onclick="scrollToSection('contact')">Контакты</button>
+                    <button class="btn-primary" onclick="scrollToSection('contact')">Записаться</button>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <h1>
+                        Caring for Your 
+                        <span class="italic">Smile</span>, 
+                        One Visit at a Time.
+                    </h1>
+                    <p>
+                        Врач-стоматолог Анна Иванова. Сочетаю доказательную медицину и современные технологии лечения зубов.
+                    </p>
+                    <button class="btn-large" onclick="scrollToSection('contact')">
+                        Записаться на консультацию →
+                    </button>
+                    <div class="trust-badges">
+                        <span>20+ научных статей</span>
+                        <span>Высшее мед. образование</span>
+                        <span>Современные технологии</span>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1593636677199-11450abb6e7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmZW1hbGUlMjBkZW50aXN0JTIwcHJvZmVzc2lvbmFsJTIwbWVkaWNhbCUyMHVuaWZvcm18ZW58MXx8fHwxNzc1ODAyMzAzfDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Врач-стоматолог">
+                    <div class="status-badge">
+                        <div class="pulse-dot"></div>
+                        <span>Доступна для записи</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Обо мне</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="icon-circle">🎓</div>
+                    <h3>Высшее медицинское образование</h3>
+                    <p>МГМСУ им. А.И. Евдокимова, специальность "Стоматология"</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-circle">📚</div>
+                    <h3>20+ научных статей</h3>
+                    <p>Публикации в ведущих российских и международных журналах</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="icon-circle">🏆</div>
+                    <h3>Постоянное обучение</h3>
+                    <p>Регулярное участие в семинарах, мастер-классах и конференциях</p>
+                </div>
+            </div>
+            
+            <div class="credo">
+                <blockquote>"Минимальная инвазивность — максимальный эстетический результат"</blockquote>
+                <p>Мое профессиональное кредо</p>
+            </div>
+            
+            <div class="section-header" style="margin-top: 4rem;">
+                <h3>Сертификаты и дипломы</h3>
+            </div>
+            <div class="certificates-grid">
+                <div class="certificate">
+                    <img src="https://images.unsplash.com/photo-1638636241638-aef5120c5153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50aXN0JTIwY2VydGlmaWNhdGUlMjBkaXBsb21hfGVufDF8fHx8MTc3NTgwMjMwNXww&ixlib=rb-4.1.0&q=80&w=1080" alt="Сертификат 1">
+                </div>
+                <div class="certificate">
+                    <img src="https://images.unsplash.com/photo-1638636241638-aef5120c5153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50aXN0JTIwY2VydGlmaWNhdGUlMjBkaXBsb21hfGVufDF8fHx8MTc3NTgwMjMwNXww&ixlib=rb-4.1.0&q=80&w=1080" alt="Сертификат 2">
+                </div>
+                <div class="certificate">
+                    <img src="https://images.unsplash.com/photo-1638636241638-aef5120c5153?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50aXN0JTIwY2VydGlmaWNhdGUlMjBkaXBsb21hfGVufDF8fHx8MTc3NTgwMjMwNXww&ixlib=rb-4.1.0&q=80&w=1080" alt="Сертификат 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" style="background: linear-gradient(to bottom, #f9fafb, white);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Услуги</h2>
+                <div class="section-divider"></div>
+                <p>Комплексный подход к лечению с использованием современных технологий</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">📋</div>
+                    <h3>Консультация и план лечения</h3>
+                    <p>Детальный осмотр, диагностика и составление индивидуального плана лечения</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #8b5cf6, #ec4899);">✨</div>
+                    <h3>Профессиональная гигиена</h3>
+                    <p>Чистка полости рта с покрытием фтор-гелем для защиты эмали</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #f97316, #ef4444);">🎨</div>
+                    <h3>Эстетическая реставрация</h3>
+                    <p>Лечение кариеса, устранение сколов зубов и дисколоритов</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #10b981, #14b8a6);">🖌️</div>
+                    <h3>Композитные виниры</h3>
+                    <p>Создание идеальной улыбки с помощью современных композитных материалов</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">😊</div>
+                    <h3>Внутрикоронковое отбеливание</h3>
+                    <p>Walking Bleach для зубов, изменивших цвет после лечения каналов</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">⚡</div>
+                    <h3>Профессиональное отбеливание</h3>
+                    <p>Быстрый результат за один визит с использованием современных систем</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before/After Section -->
+    <section id="cases" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Кейсы «До / После»</h2>
+                <div class="section-divider"></div>
+                <p>Реальные результаты моей работы</p>
+            </div>
+            
+            <div class="slider-container">
+                <div class="case-slider">
+                    <!-- Case 1 -->
+                    <div class="case-slide">
+                        <div class="comparison-slider" id="slider1">
+                            <img src="https://images.unsplash.com/photo-1611818967077-78c60776ecdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWlsZSUyMHBhdGllbnQlMjBzYXRpc2ZpZWR8ZW58MXx8fHwxNzc1ODAyMzA1fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="После" class="after-image">
+                            <div class="before-layer">
+                                <img src="https://images.unsplash.com/photo-1612283105368-36468f634599?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBiZWZvcmUlMjBhZnRlciUyMHRyZWF0bWVudHxlbnwxfHx8fDE3NzU4MDIzMDR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="До" class="before-image">
+                            </div>
+                            <div class="slider-handle" style="left: 50%;"></div>
+                            <div class="slider-labels">
+                                <span class="slider-label">До</span>
+                                <span class="slider-label">После</span>
+                            </div>
+                        </div>
+                        <div class="case-details">
+                            <div class="case-detail">
+                                <h4 style="color: #2563eb;">Исходная ситуация</h4>
+                                <p>Дисколорит 1.1 зуба, оттенок А4</p>
+                            </div>
+                            <div class="case-detail">
+                                <h4 style="color: #9333ea;">Проведенная работа</h4>
+                                <p>Внутрикоронковое отбеливание Opalescence Endo + фотоактивация</p>
+                            </div>
+                            <div class="case-detail">
+                                <h4 style="color: #10b981;">Результат</h4>
+                                <p>Достигнут оттенок А1, срок лечения — 2 визита</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" style="background: linear-gradient(to bottom, #f9fafb, white);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Отзывы пациентов</h2>
+                <div class="section-divider"></div>
+                <p>Что говорят те, кто уже доверил мне свою улыбку</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1584516150909-c43483ee7932?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHBhdGllbnQlMjB0ZXN0aW1vbmlhbHxlbnwxfHx8fDE3NzU3MTg5MjB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Мария Петрова" class="testimonial-avatar">
+                        <div>
+                            <h4>Мария Петрова</h4>
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Анна Ивановна - настоящий профессионал! Я боялась стоматологов всю жизнь, но здесь все прошло абсолютно безболезненно. Результат превзошел все ожидания!</p>
+                    <div class="testimonial-source">Источник: ПроДокторов</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1611818967077-78c60776ecdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWlsZSUyMHBhdGllbnQlMjBzYXRpc2ZpZWR8ZW58MXx8fHwxNzc1ODAyMzA1fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Дмитрий Соколов" class="testimonial-avatar">
+                        <div>
+                            <h4>Дмитрий Соколов</h4>
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Сделал внутрикоронковое отбеливание депульпированного зуба. Цвет выровнялся идеально! Спасибо за внимательность и индивидуальный подход.</p>
+                    <div class="testimonial-source">Источник: Яндекс.Карты</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1584516150909-c43483ee7932?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHBhdGllbnQlMjB0ZXN0aW1vbmlhbHxlbnwxfHx8fDE3NzU3MTg5MjB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Елена Краснова" class="testimonial-avatar">
+                        <div>
+                            <h4>Елена Краснова</h4>
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Композитные виниры сделали за 2 визита. Зубы выглядят естественно и красиво! Очень довольна, что не стала делать обточку под керамику.</p>
+                    <div class="testimonial-source">Источник: Google Reviews</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="https://images.unsplash.com/photo-1611818967077-78c60776ecdf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWlsZSUyMHBhdGllbnQlMjBzYXRpc2ZpZWR8ZW58MXx8fHwxNzc1ODAyMzA1fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Александр Волков" class="testimonial-avatar">
+                        <div>
+                            <h4>Александр Волков</h4>
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">Профессиональное отбеливание дало потрясающий результат! Зубы стали белее на несколько тонов. Врач все подробно объяснила.</p>
+                    <div class="testimonial-source">Источник: ПроДокторов</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Часто задаваемые вопросы</h2>
+                <div class="section-divider"></div>
+                <p>Ответы на самые популярные вопросы пациентов</p>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Больно ли отбеливать депульпированный зуб?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Нет, процедура абсолютно безболезненна, так как зуб уже депульпирован (нерв удален). Отбеливающий гель помещается внутрь зуба через специальное отверстие, и вы не чувствуете никакого дискомфорта.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Насколько стабилен результат внутрикоронкового отбеливания?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        При правильном уходе результат сохраняется от 2 до 5 лет. Стабильность зависит от индивидуальных особенностей и соблюдения рекомендаций врача.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Почему нельзя просто поставить винир?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Установка винира требует обточки здоровых тканей зуба. Мы придерживаемся принципа биологической целесообразности: сначала пробуем минимально инвазивные методы.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Как долго длится процедура профессионального отбеливания?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Процедура занимает около 1-1.5 часов. Результат виден сразу после первого визита. В зависимости от исходного оттенка может потребоваться 1-2 процедуры.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Чем композитные виниры отличаются от керамических?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        Композитные виниры создаются за один визит, не требуют сильной обточки и стоят дешевле. Керамические более долговечны, но требуют обточки и изготовления в лаборатории.
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <p style="color: #4b5563; margin-bottom: 1rem;">Не нашли ответ на свой вопрос?</p>
+                <button class="btn-primary" style="padding: 0.75rem 2rem;" onclick="scrollToSection('contact')">
+                    Задать вопрос
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: linear-gradient(to bottom, #f9fafb, white);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Контакты и запись</h2>
+                <div class="section-divider"></div>
+                <p>Свяжитесь со мной удобным для вас способом</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 1.5rem;">Форма обратной связи</h3>
+                    <form onsubmit="handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" placeholder="Введите ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" placeholder="+7 (999) 123-45-67" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email (необязательно)</label>
+                            <input type="email" id="email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" rows="4" placeholder="Расскажите о вашей проблеме или вопросе..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-large" style="width: 100%;">
+                            ✉️ Отправить заявку
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <a href="tel:+79991234567" class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Телефон</p>
+                            <p style="font-size: 1.125rem;">+7 (999) 123-45-67</p>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:anna.ivanova@dental.ru" class="contact-card">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Email</p>
+                            <p style="font-size: 1.125rem;">anna.ivanova@dental.ru</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#map" class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <p style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.25rem;">Адрес</p>
+                            <p style="font-size: 1.125rem;">Москва, ул. Примерная, д. 10</p>
+                        </div>
+                    </a>
+                    
+                    <div class="messengers">
+                        <h3>Напишите в мессенджер</h3>
+                        <p>Быстрый ответ в удобном формате</p>
+                        <div class="messenger-buttons">
+                            <a href="https://wa.me/79991234567" target="_blank" class="messenger-btn">
+                                💬 WhatsApp
+                            </a>
+                            <a href="https://t.me/dentist_anna" target="_blank" class="messenger-btn">
+                                ✈️ Telegram
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <div class="map-image">
+                            <img src="https://images.unsplash.com/photo-1704455306925-1401c3012117?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZW50YWwlMjBjbGluaWMlMjBpbnRlcmlvcnxlbnwxfHx8fDE3NzU4MDE3NTB8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Клиника">
+                            <div class="map-overlay">
+                                <p style="font-size: 0.875rem; margin-bottom: 0.25rem;">Стоматологическая клиника</p>
+                                <p style="font-size: 1.125rem;">Москва, ул. Примерная, д. 10</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Анна Иванова</h3>
+                    <p>Врач-стоматолог. Сочетаю доказательную медицину и современные технологии лечения зубов.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><button onclick="scrollToSection('about')">Обо мне</button></li>
+                        <li><button onclick="scrollToSection('services')">Услуги</button></li>
+                        <li><button onclick="scrollToSection('cases')">Кейсы</button></li>
+                        <li><button onclick="scrollToSection('testimonials')">Отзывы</button></li>
+                        <li><button onclick="scrollToSection('faq')">FAQ</button></li>
+                        <li><button onclick="scrollToSection('contact')">Контакты</button></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><a href="tel:+79991234567">+7 (999) 123-45-67</a></li>
+                        <li><a href="mailto:anna.ivanova@dental.ru">anna.ivanova@dental.ru</a></li>
+                        <li style="color: #9ca3af;">Москва, ул. Примерная, д. 10</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2026 Анна Иванова. Все права защищены.</p>
+                <p>Сделано с ❤️ для ваших улыбок</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- jQuery (required for Slick Carousel) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
+    <script>
+        // Smooth scroll function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const allItems = document.querySelectorAll('.faq-item');
+            
+            allItems.forEach(i => {
+                if (i !== item) {
+                    i.classList.remove('active');
+                }
+            });
+            
+            item.classList.toggle('active');
+        }
+        
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            showToast('Спасибо за обращение! Мы свяжемся с вами в ближайшее время.', 'success');
+            event.target.reset();
+        }
+        
+        // Toast notification
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Before/After Slider functionality
+        function initComparisonSlider(sliderId) {
+            const slider = document.getElementById(sliderId);
+            if (!slider) return;
+            
+            const handle = slider.querySelector('.slider-handle');
+            const beforeLayer = slider.querySelector('.before-layer');
+            let isDragging = false;
+            
+            function updateSlider(clientX) {
+                const rect = slider.getBoundingClientRect();
+                const x = clientX - rect.left;
+                const percentage = Math.min(Math.max((x / rect.width) * 100, 0), 100);
+                
+                handle.style.left = percentage + '%';
+                beforeLayer.style.clipPath = `inset(0 ${100 - percentage}% 0 0)`;
+            }
+            
+            slider.addEventListener('mousedown', () => isDragging = true);
+            slider.addEventListener('mouseup', () => isDragging = false);
+            slider.addEventListener('mouseleave', () => isDragging = false);
+            
+            slider.addEventListener('mousemove', (e) => {
+                if (isDragging) updateSlider(e.clientX);
+            });
+            
+            slider.addEventListener('touchstart', () => isDragging = true);
+            slider.addEventListener('touchend', () => isDragging = false);
+            
+            slider.addEventListener('touchmove', (e) => {
+                if (isDragging && e.touches[0]) {
+                    updateSlider(e.touches[0].clientX);
+                }
+            });
+        }
+        
+        // Initialize comparison slider
+        document.addEventListener('DOMContentLoaded', function() {
+            initComparisonSlider('slider1');
+        });
+    </script>
+</body>
+</html>
