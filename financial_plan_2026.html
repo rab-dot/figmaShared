@@ -1,0 +1,167 @@
+
+<style>
+.phase { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+.phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.phase-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 500; flex-shrink: 0; }
+.phase-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.phase-period { font-size: 12px; color: var(--color-text-tertiary); margin-left: auto; }
+.assets { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 10px; }
+.asset { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 8px 10px; }
+.asset-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px; }
+.asset-action { font-size: 11px; color: var(--color-text-secondary); }
+.trigger { font-size: 12px; color: var(--color-text-secondary); border-left: 2px solid var(--color-border-secondary); padding-left: 10px; margin-top: 8px; border-radius: 0; }
+.risk { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 2px 8px; border-radius: 99px; margin-top: 6px; }
+.risk-med { background: var(--color-background-warning); color: var(--color-text-warning); }
+.risk-high { background: var(--color-background-danger); color: var(--color-text-danger); }
+.risk-low { background: var(--color-background-success); color: var(--color-text-success); }
+.alloc-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.alloc-label { font-size: 12px; color: var(--color-text-secondary); width: 130px; flex-shrink: 0; }
+.alloc-bar-wrap { flex: 1; height: 6px; background: var(--color-border-tertiary); border-radius: 3px; }
+.alloc-bar { height: 6px; border-radius: 3px; }
+.alloc-pct { font-size: 12px; font-weight: 500; color: var(--color-text-primary); width: 32px; text-align: right; }
+.disclaimer { font-size: 11px; color: var(--color-text-tertiary); margin-top: 1rem; padding: 10px 12px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); }
+</style>
+
+<h2 class="sr-only">Финансовый план на 2026 год: четыре фазы ротации между криптовалютами, металлами и долларом</h2>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#E6F1FB;color:#0C447C;">1</div>
+    <div class="phase-title">Сейчас — удерживать и накапливать</div>
+    <div class="phase-period">Май — июнь 2026</div>
+  </div>
+  <div class="assets">
+    <div class="asset">
+      <div class="asset-name">BTC / ETH</div>
+      <div class="asset-action">Держать, не продавать</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Доллар USD</div>
+      <div class="asset-action">Купить по 2.74 BYN</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Серебро</div>
+      <div class="asset-action">Небольшая позиция ~$75</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Рублёвый депозит</div>
+      <div class="asset-action">Ликвидная подушка</div>
+    </div>
+  </div>
+  <div class="trigger">Катализатор: апгрейд Ethereum Glamsterdam (июнь), мидтермы на горизонте, BTC на -40% от ATH</div>
+  <span class="risk risk-med">Умеренный риск</span>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#EEEDFE;color:#3C3489;">2</div>
+    <div class="phase-title">Новости о мире на Ближнем Востоке</div>
+    <div class="phase-period">Июль — август 2026 (ориентир)</div>
+  </div>
+  <div class="assets">
+    <div class="asset">
+      <div class="asset-name">BTC / ETH</div>
+      <div class="asset-action">Фиксировать 30–50% прибыли</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Золото</div>
+      <div class="asset-action">Покупать при откате к $4 000</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Серебро</div>
+      <div class="asset-action">Наращивать позицию</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Медь (токен)</div>
+      <div class="asset-action">Небольшая позиция</div>
+    </div>
+  </div>
+  <div class="trigger">Триггер: объявление о переговорах / перемирии → крипта даёт эйфорийный рост → момент ротации в металлы</div>
+  <span class="risk risk-high">Важен тайминг</span>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#FAEEDA;color:#633806;">3</div>
+    <div class="phase-title">Лаговая инфляция догоняет экономику</div>
+    <div class="phase-period">Август — октябрь 2026</div>
+  </div>
+  <div class="assets">
+    <div class="asset">
+      <div class="asset-name">Золото</div>
+      <div class="asset-action">Держать, цель $5 000</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Серебро</div>
+      <div class="asset-action">Держать, цель $95–110</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Стейблкоины</div>
+      <div class="asset-action">DeFi 5–8% годовых</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">BTC</div>
+      <div class="asset-action">Удерживать остаток</div>
+    </div>
+  </div>
+  <div class="trigger">Логика: рынок забыл о войне, но дорогая нефть и логистика входят в цены → металлы растут на стагфляции</div>
+  <span class="risk risk-low">Низкий риск при правильной позиции</span>
+</div>
+
+<div class="phase">
+  <div class="phase-header">
+    <div class="phase-num" style="background:#E1F5EE;color:#085041;">4</div>
+    <div class="phase-title">Предвыборное ралли перед мидтермами</div>
+    <div class="phase-period">Октябрь — ноябрь 2026</div>
+  </div>
+  <div class="assets">
+    <div class="asset">
+      <div class="asset-name">BTC / ETH</div>
+      <div class="asset-action">Наращивать обратно</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Золото / серебро</div>
+      <div class="asset-action">Частичная фиксация</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">Токен. акции</div>
+      <div class="asset-action">S&P 500 через xStocks</div>
+    </div>
+    <div class="asset">
+      <div class="asset-name">USD</div>
+      <div class="asset-action">Держать как резерв</div>
+    </div>
+  </div>
+  <div class="trigger">Катализатор: ФРС смягчается, Трамп нужен рост рынка, регуляторный оптимизм по крипте усиливается</div>
+  <span class="risk risk-med">Умеренный риск</span>
+</div>
+
+<div style="margin-top: 1.5rem; margin-bottom: 8px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary);">Целевое распределение прямо сейчас</div>
+
+<div class="alloc-row">
+  <div class="alloc-label">BTC / ETH</div>
+  <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:35%;background:#378ADD;"></div></div>
+  <div class="alloc-pct">35%</div>
+</div>
+<div class="alloc-row">
+  <div class="alloc-label">Доллар (депозит)</div>
+  <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:25%;background:#1D9E75;"></div></div>
+  <div class="alloc-pct">25%</div>
+</div>
+<div class="alloc-row">
+  <div class="alloc-label">Серебро</div>
+  <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:15%;background:#888780;"></div></div>
+  <div class="alloc-pct">15%</div>
+</div>
+<div class="alloc-row">
+  <div class="alloc-label">Рублёвый депозит</div>
+  <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:15%;background:#639922;"></div></div>
+  <div class="alloc-pct">15%</div>
+</div>
+<div class="alloc-row">
+  <div class="alloc-label">Золото (лимит $4k)</div>
+  <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:10%;background:#EF9F27;"></div></div>
+  <div class="alloc-pct">10%</div>
+</div>
+
+<div class="disclaimer">Это не инвестиционный совет. Все решения и риски — ваши. Пропорции примерные и зависят от вашего капитала, горизонта и терпимости к риску.</div>
